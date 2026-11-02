@@ -34,3 +34,7 @@ section + section {
 .card h3 {
   margin-top: 0;
 }
+
+.post-links {
+  padding-left: 1.25rem;
+}

@@ -14,9 +14,8 @@ export const routes: Routes = [
         title: 'Blog | Noah Coe',
     },
     {
-        path: 'blog/slug',
-        loadComponent: ()=> import('./pages/blog-post/blog-post').then((m) => m.BlogPost),
-        title: 'Blog Post | Noah Coe',
+        path: 'blog/:slug',
+        loadComponent: () => import('./pages/blog-post/blog-post').then((m) => m.BlogPost),
     },
     {
         path: 'contact',

@@ -1,1 +1,25 @@
-<p>blog-post works!</p>
+<a routerLink="/blog" class="back-link">← All posts</a>
+
+@if (details(); as post) {
+  <article>
+    <h1>{{ post.title }}</h1>
+    <p class="muted">
+      <time [attr.datetime]="post.date">{{ post.date | date: 'longDate' }}</time>
+    </p>
+
+    @if (markdown.isLoading()) {
+      <p>Loading…</p>
+    } @else if (markdown.error()) {
+      <p>Sorry, this post couldn't load. Try refreshing the page.</p>
+    } @else {
+      <div class="prose" [innerHTML]="html()"></div>
+    }
+  </article>
+} @else if (blog.posts.isLoading()) {
+  <p>Loading…</p>
+} @else if (blog.posts.error()) {
+  <p>Sorry, the blog couldn't load. Try refreshing the page.</p>
+} @else {
+  <h1>Post not found</h1>
+  <p>That post doesn't exist. It may have been renamed or removed.</p>
+}

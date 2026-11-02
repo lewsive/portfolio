@@ -1,1 +1,82 @@
-<p>contact works!</p>
+<h1>Contact</h1>
+<p class="muted">Have a question or an opportunity? Send me a message and I'll reply by email.</p>
+
+@if (status() === 'sent') {
+  <div class="card" role="status">
+    <h2>Thanks! Your message is on its way.</h2>
+    <p>I'll get back to you within a couple of days.</p>
+    <button type="button" class="button" (click)="status.set('idle')">Send another message</button>
+  </div>
+} @else {
+  <form class="contact-form" [formGroup]="form" (ngSubmit)="send()" novalidate>
+    <div class="field">
+      <label for="name">Name</label>
+      <input
+        id="name"
+        type="text"
+        formControlName="name"
+        autocomplete="name"
+        [attr.aria-invalid]="showError('name')"
+        [attr.aria-describedby]="showError('name') ? 'name-error' : null"
+      />
+      @if (showError('name')) {
+        <p class="error" id="name-error">Please enter your name.</p>
+      }
+    </div>
+
+    <div class="field">
+      <label for="email">Email</label>
+      <input
+        id="email"
+        type="email"
+        formControlName="email"
+        autocomplete="email"
+        [attr.aria-invalid]="showError('email')"
+        [attr.aria-describedby]="showError('email') ? 'email-error' : null"
+      />
+      @if (showError('email')) {
+        <p class="error" id="email-error">
+          @if (form.controls.email.hasError('required')) {
+            Please enter your email.
+          } @else {
+            That doesn't look like an email address.
+          }
+        </p>
+      }
+    </div>
+
+    <div class="field">
+      <label for="message">Message</label>
+      <textarea
+        id="message"
+        rows="6"
+        formControlName="message"
+        [attr.aria-invalid]="showError('message')"
+        [attr.aria-describedby]="showError('message') ? 'message-error' : null"
+      ></textarea>
+      @if (showError('message')) {
+        <p class="error" id="message-error">
+          @if (form.controls.message.hasError('required')) {
+            Please write a message.
+          } @else if (form.controls.message.hasError('minlength')) {
+            Please write at least 10 characters.
+          } @else {
+            Please keep it under 5,000 characters.
+          }
+        </p>
+      }
+    </div>
+
+    <input type="text" formControlName="_gotcha" class="honeypot" autocomplete="off" />
+
+    @if (status() === 'error') {
+      <p class="error" role="alert">
+        Something went wrong and your message wasn't sent. Please try again in a minute.
+      </p>
+    }
+
+    <button type="submit" class="button" [disabled]="status() === 'sending'">
+      {{ status() === 'sending' ? 'Sending…' : 'Send message' }}
+    </button>
+  </form>
+}

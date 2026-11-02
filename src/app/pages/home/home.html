@@ -35,3 +35,17 @@
     }
   </div>
 </section>
+
+@if (latestPosts().length > 0) {
+  <section aria-labelledby="writing-heading">
+    <h2 id="writing-heading">Latest writing</h2>
+    <ul class="post-links">
+      @for (post of latestPosts(); track post.slug) {
+        <li>
+          <a [routerLink]="['/blog', post.slug]">{{ post.title }}</a>
+          <span class="muted"> · {{ post.date | date: 'mediumDate' }}</span>
+        </li>
+      }
+    </ul>
+  </section>
+}
