@@ -1,0 +1,21 @@
+:host {
+  display: block;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  height: 100%;
+}
+
+.project-card h3,
+.project-card p {
+  margin: 0;
+}
+
+.links {
+  display: flex;
+  gap: 1rem;
+  margin-top: auto;
+}

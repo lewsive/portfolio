@@ -1,1 +1,31 @@
-<p>projects works!</p>
+<h1>Projects</h1>
+<p class="muted">Things I've built, from class projects to production work.</p>
+
+<div class="filters" role="group" aria-label="Filter projects by technology">
+  <button
+    type="button"
+    class="filter"
+    [attr.aria-pressed]="selectedTech() === null"
+    (click)="selectedTech.set(null)"
+  >
+    All
+  </button>
+  @for (tech of allTech; track tech) {
+    <button
+      type="button"
+      class="filter"
+      [attr.aria-pressed]="selectedTech() === tech"
+      (click)="selectedTech.set(tech)"
+    >
+      {{ tech }}
+    </button>
+  }
+</div>
+
+<div class="grid">
+  @for (project of visibleProjects(); track project.title) {
+    <app-project-card [project]="project" />
+  } @empty {
+    <p>No projects use that yet.</p>
+  }
+</div>
