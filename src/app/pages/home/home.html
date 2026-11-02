@@ -1,1 +1,37 @@
-<p>home works!</p>
+<section class="hero">
+  <p class="eyebrow">Hi, I'm Noah</p>
+  <h1>I build full-stack web apps.</h1>
+  <p class="lead">
+    I'm a software engineer and UCF Computer Science graduate in Central Florida. I work in
+    TypeScript, Python, and SQL, and I write about what I'm learning.
+  </p>
+  <div class="actions">
+    <a routerLink="/projects" class="button">See my projects</a>
+    <a routerLink="/contact" class="button button-outline">Get in touch</a>
+  </div>
+</section>
+
+<section aria-labelledby="about-heading">
+  <h2 id="about-heading">About me</h2>
+  <p>
+    Currently, I'm building a scanner for sythensizer presets, in order to better organize a large collection of presets.
+    I'm also learning the C++ JUCE framework to help make audio plugins.
+    I'm seeking new employment opportunities currently, and I'm open to full-time or contract work. If you're interested in working together, please reach out!
+  </p>
+</section>
+
+<section aria-labelledby="skills-heading">
+  <h2 id="skills-heading">Skills</h2>
+  <div class="grid">
+    @for (group of skillGroups; track group.name) {
+      <div class="card">
+        <h3>{{ group.name }}</h3>
+        <ul class="tag-list">
+          @for (skill of group.skills; track skill) {
+            <li class="tag">{{ skill }}</li>
+          }
+        </ul>
+      </div>
+    }
+  </div>
+</section>
